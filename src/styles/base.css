@@ -1,0 +1,391 @@
+/* =========================================================
+   BASE.CSS — shared by industry.css / event.css / update.css / product.css
+   Import this first in every template stylesheet:
+     @import url('http://localhost:3000/styles/base.css');
+   Contains: fonts, tokens, canvas/scrim, signature trace marks,
+   header/logos, badge, quote, cta, tags, footer.
+   Template-specific files add only their own content blocks
+   and [data-layout] variants.
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #06080f;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* =========================================================
+   CANVAS
+   ========================================================= */
+.poster {
+  --accent: #5b8def;
+  --accent2: #ffb454;
+  --ink: #f5f7fa;
+  --muted: #93a0b4;
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-strong: rgba(255, 255, 255, 0.09);
+  --success: #3ed598;
+  --warning: #ffc857;
+  --danger: #ff5c7a;
+  --neutral: #93a0b4;
+
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  background-color: #06080f;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(
+      1200px 700px at 85% -10%,
+      color-mix(in srgb, var(--accent) 20%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 7, 14, 0.55) 0%,
+      rgba(4, 7, 14, 0.82) 45%,
+      rgba(4, 7, 14, 0.94) 100%
+    );
+}
+
+/* =========================================================
+   SIGNATURE — circuit trace corner marks (constant, all templates)
+   ========================================================= */
+.trace {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  opacity: 0.9;
+  filter: drop-shadow(
+    0 0 6px color-mix(in srgb, var(--accent) 60%, transparent)
+  );
+}
+
+.trace::before,
+.trace::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+  border-radius: 1px;
+}
+
+.trace-tl {
+  top: 26px;
+  left: 26px;
+}
+.trace-tl::before {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 40px;
+}
+.trace-tl::after {
+  top: 38px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+}
+
+.trace-br {
+  bottom: 26px;
+  right: 26px;
+}
+.trace-br::before {
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  height: 40px;
+}
+.trace-br::after {
+  bottom: 38px;
+  right: 0;
+  width: 40px;
+  height: 2px;
+}
+
+/* =========================================================
+   HEADER — logos always top-left / top-right, in every template,
+   regardless of layout variant. Never nest this under [data-layout].
+   ========================================================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+}
+
+/* =========================================================
+   BADGE — small pill label, e.g. "INDUSTRY", "EVENT", "NEW"
+   badge.type -> primary | success | warning | danger | neutral
+   ========================================================= */
+.badge-row {
+  display: flex;
+  margin-top: 36px;
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid
+    color-mix(in srgb, var(--badge-color, var(--accent)) 55%, transparent);
+  color: var(--badge-color, var(--accent));
+  background: color-mix(
+    in srgb,
+    var(--badge-color, var(--accent)) 12%,
+    transparent
+  );
+}
+
+.badge[data-type='success'] {
+  --badge-color: var(--success);
+}
+.badge[data-type='warning'] {
+  --badge-color: var(--warning);
+}
+.badge[data-type='danger'] {
+  --badge-color: var(--danger);
+}
+.badge[data-type='neutral'] {
+  --badge-color: var(--neutral);
+}
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+.quote {
+  position: relative;
+  z-index: 2;
+  padding: 8px 0 8px 28px;
+  border-left: 3px solid var(--accent2);
+}
+
+.quote-text {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.4;
+  margin: 0;
+  font-style: normal;
+}
+
+.quote-text::before {
+  content: '“';
+  color: var(--accent2);
+}
+
+.quote-text::after {
+  content: '”';
+  color: var(--accent2);
+}
+
+.quote-author {
+  margin-top: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.quote-author::before {
+  content: '— ';
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #06080f;
+  background: var(--accent);
+  padding: 14px 24px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.cta::after {
+  content: '→';
+}
+
+/* =========================================================
+   FOOTER — tags row + brand line
+   ========================================================= */
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 36px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-line {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 100%;
+}
+
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  padding: 7px 15px;
+  border-radius: 999px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* =========================================================
+   SHARED CONTENT PRIMITIVES (reused by every template's own CSS)
+   ========================================================= */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 880px;
+}
+
+.headline {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 58px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 27px;
+  color: var(--muted);
+  margin: 16px 0 0;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.rule::before {
+  content: '';
+  width: 64px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.rule-node {
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
+  border-radius: 2px;
+  background: var(--accent2);
+  transform: rotate(45deg);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 24px 26px;
+  min-width: 190px;
+  flex: 1;
+}
+
+.number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--ink);
+}
+
+.label {
+  margin-top: 8px;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}

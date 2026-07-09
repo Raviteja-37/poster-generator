@@ -1,0 +1,121 @@
+@import url('http://localhost:3000/styles/base.css');
+
+.badge-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.version-chip {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--panel-strong);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================================
+   CHANGELOG
+   ========================================================= */
+.changelog {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.change-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--neutral);
+}
+
+.change-row[data-type='new'] {
+  border-left-color: var(--success);
+}
+
+.change-row[data-type='improved'] {
+  border-left-color: var(--accent);
+}
+
+.change-row[data-type='fixed'] {
+  border-left-color: var(--warning);
+}
+
+.change-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.change-row[data-type='new'] .change-tag {
+  color: var(--success);
+}
+
+.change-row[data-type='improved'] .change-tag {
+  color: var(--accent);
+}
+
+.change-row[data-type='fixed'] .change-tag {
+  color: var(--warning);
+}
+
+.change-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   LAYOUT VARIANT: highlight
+   Big centered version badge as the hero, changelog compact below.
+   ========================================================= */
+[data-layout='highlight'] .content {
+  align-items: center;
+  text-align: center;
+}
+
+[data-layout='highlight'] .text-block {
+  align-items: center;
+}
+
+[data-layout='highlight'] .badge-row {
+  justify-content: center;
+}
+
+[data-layout='highlight'] .version-chip {
+  font-size: 20px;
+  padding: 10px 22px;
+}
+
+[data-layout='highlight'] .headline {
+  font-size: 66px;
+}
+
+[data-layout='highlight'] .rule {
+  justify-content: center;
+}
+
+[data-layout='highlight'] .changelog {
+  text-align: left;
+  max-width: 700px;
+  align-self: center;
+}
+
+[data-layout='highlight'] .stats {
+  justify-content: center;
+}

@@ -1,0 +1,64 @@
+### Health Check
+GET http://localhost:3000
+
+###
+
+POST http://localhost:3000/generate
+Content-Type: application/json
+
+{
+  "template": "event",
+
+  "headline": "Quantum Chip Design is Too Slow",
+  "subtitle": "AI is changing engineering workflows",
+
+  "badge": {
+    "text": "INDUSTRY",
+    "type": "primary"
+  },
+
+  "stats": [
+    {
+      "value": "540 Days",
+      "label": "Average Design Cycle"
+    },
+    {
+      "value": "$2M+",
+      "label": "Fabrication Cost"
+    }
+  ],
+
+  "sections": [
+    {
+      "type": "insight",
+      "title": "💡 Insight",
+      "content": "Today's chip development requires hundreds of manual iterations."
+    },
+    {
+      "type": "comparison",
+      "title": "Before vs After",
+      "items": [
+        "Manual layout optimization",
+        "AI-assisted optimization"
+      ]
+    }
+  ],
+
+  "quote": {
+    "text": "Innovation begins with better engineering tools.",
+    "author": "SilicoFeller"
+  },
+
+  "cta": {
+    "title": "Learn More",
+    "url": "https://silicofeller.ai"
+  },
+
+  "tags": [
+    "Quantum",
+    "AI",
+    "Hardware"
+  ],
+
+  "footer": "SilicoFeller • AI for Superconducting Chip Design"
+}

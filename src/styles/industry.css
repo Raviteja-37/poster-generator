@@ -1,0 +1,207 @@
+@import url('http://localhost:3000/styles/base.css');
+
+/* =========================================================
+   INDUSTRY — section styles (insight / question / comparison)
+   ========================================================= */
+.section {
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px 14px 14px 4px;
+  padding: 24px 28px;
+}
+
+.sectionTitle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.prompt {
+  color: var(--accent2);
+}
+
+.section p {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+/* comparison: two-card before/after */
+.section-comparison {
+  border-left: none;
+  background: transparent;
+  padding: 0;
+}
+
+.section-comparison .sectionTitle {
+  color: var(--ink);
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 16px;
+}
+
+.compare-row {
+  display: flex;
+  align-items: stretch;
+  gap: 18px;
+}
+
+.compare-card {
+  flex: 1;
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-before {
+  border-left: 3px solid var(--danger);
+}
+
+.compare-after {
+  border-left: 3px solid var(--success);
+}
+
+.compare-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.compare-card p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.compare-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: 24px;
+}
+
+.compare-list {
+  margin: 0;
+  padding-left: 22px;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   LAYOUT VARIANTS
+   ========================================================= */
+[data-layout='split'] .content {
+  flex-direction: row;
+  align-items: center;
+  gap: 56px;
+}
+
+[data-layout='split'] .text-block {
+  flex: 1.1;
+}
+
+[data-layout='split'] .headline {
+  font-size: 52px;
+}
+
+[data-layout='split'] .content > *:not(.text-block) {
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+[data-layout='split'] .stats {
+  flex-direction: column;
+}
+
+[data-layout='bold'] .content {
+  align-items: center;
+  text-align: center;
+}
+
+[data-layout='bold'] .text-block {
+  align-items: center;
+  max-width: 900px;
+}
+
+[data-layout='bold'] .headline {
+  font-size: 72px;
+  text-transform: uppercase;
+}
+
+[data-layout='bold'] .rule,
+[data-layout='bold'] .stats {
+  justify-content: center;
+}
+
+[data-layout='bold'] .section,
+[data-layout='bold'] .quote {
+  text-align: left;
+  max-width: 760px;
+}
+
+[data-layout='spotlight'] .content {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+[data-layout='spotlight'] .text-block {
+  align-items: center;
+}
+
+[data-layout='spotlight'] .headline {
+  font-size: 54px;
+}
+
+[data-layout='spotlight'] .rule,
+[data-layout='spotlight'] .stats {
+  justify-content: center;
+}
+
+[data-layout='spotlight'] .card {
+  background: var(--panel-strong);
+}
+
+[data-layout='spotlight'] .section,
+[data-layout='spotlight'] .quote {
+  text-align: left;
+  max-width: 760px;
+}
+
+[data-layout='editorial'] .subtitle {
+  order: -1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+[data-layout='editorial'] .subtitle::before {
+  content: '// ';
+  color: var(--accent2);
+}
+
+[data-layout='editorial'] .headline {
+  font-size: 60px;
+  max-width: 760px;
+}

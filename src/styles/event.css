@@ -1,0 +1,151 @@
+@import url('http://localhost:3000/styles/base.css');
+
+/* =========================================================
+   EVENT — meta row (date/time/location) styled like a ticket stub
+   ========================================================= */
+.meta-row {
+  display: flex;
+  gap: 0;
+  background: var(--panel);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.meta-item {
+  flex: 1;
+  padding: 20px 26px;
+  border-right: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.meta-item:last-child {
+  border-right: none;
+}
+
+.meta-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.meta-value {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/* =========================================================
+   AGENDA — timeline (order genuinely carries information here)
+   ========================================================= */
+.agenda {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  padding-left: 24px;
+}
+
+.agenda-row {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 12px 0;
+  position: relative;
+}
+
+.agenda-dot {
+  position: absolute;
+  left: -30px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow:
+    0 0 0 4px rgba(6, 8, 15, 1),
+    0 0 0 5px rgba(255, 255, 255, 0.15);
+}
+
+.agenda-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  color: var(--muted);
+  min-width: 90px;
+}
+
+.agenda-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   SPEAKERS
+   ========================================================= */
+.speakers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.speaker-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 10px 20px;
+}
+
+.speaker-name {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.speaker-role {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.speaker-role::before {
+  content: '• ';
+}
+
+/* =========================================================
+   LAYOUT VARIANTS
+   ========================================================= */
+[data-layout='centered'] .content {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+[data-layout='centered'] .text-block {
+  align-items: center;
+}
+
+[data-layout='centered'] .headline {
+  font-size: 62px;
+}
+
+[data-layout='centered'] .rule {
+  justify-content: center;
+}
+
+[data-layout='centered'] .meta-row {
+  max-width: 720px;
+  align-self: center;
+}
+
+[data-layout='centered'] .agenda {
+  text-align: left;
+  max-width: 640px;
+  align-self: center;
+}
+
+[data-layout='centered'] .speakers {
+  justify-content: center;
+}
