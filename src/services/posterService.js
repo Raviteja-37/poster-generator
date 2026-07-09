@@ -17,9 +17,8 @@ function generateHTML(data) {
 
   const renderData = {
     ...data,
-
-    baseUrl: process.env.BASE_URL,
-
+    baseUrl:
+      process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`,
     background: getRandomBackground(data.template),
   };
   console.log('Selected Background:', renderData.background);

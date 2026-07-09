@@ -1,4 +1,4 @@
-@import url('http://localhost:3000/styles/base.css');
+@import './base.css';
 
 /* =========================================================
    INDUSTRY — section styles (insight / question / comparison)

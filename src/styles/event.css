@@ -1,4 +1,4 @@
-@import url('http://localhost:3000/styles/base.css');
+@import './base.css';
 
 /* =========================================================
    EVENT — meta row (date/time/location) styled like a ticket stub
