@@ -19,6 +19,14 @@ app.get('/health', (req, res) => {
   });
 });
 
+app.get('/warmup', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Poster engine warmed up',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // Static files
 app.get('/', (req, res) => {
   res.json({
@@ -35,5 +43,5 @@ app.use('/generate', generateRoute);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Poster Generator running on http://localhost:${PORT}`);
+  console.log(`🚀 Poster Generator running on port ${PORT}`);
 });
