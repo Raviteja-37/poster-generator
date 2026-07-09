@@ -7,7 +7,7 @@ POST http://localhost:3000/generate
 Content-Type: application/json
 
 {
-  "template": "event",
+  "template": "product",
 
   "headline": "Quantum Chip Design is Too Slow",
   "subtitle": "AI is changing engineering workflows",

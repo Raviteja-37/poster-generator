@@ -4,7 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=1080, height=1080" />
-  <link rel="stylesheet" href="http://localhost:3000/styles/update.css" />
+  <link
+  rel='stylesheet'
+  href='{{baseUrl}}/styles/{{template}}.css'
+/>
 </head>
 
 <body>
@@ -23,15 +26,15 @@
   <div
     class="poster"
     data-layout="{{#if layout}}{{layout}}{{else}}changelog{{/if}}"
-    style="background-image:url('http://localhost:3000/assets/backgrounds/{{background}}'); --accent: {{#if accentColor}}{{accentColor}}{{else}}#5B8DEF{{/if}};"
+    style="background-image:url('{{baseUrl}}/assets/backgrounds/{{background}}'); --accent: {{#if accentColor}}{{accentColor}}{{else}}#5B8DEF{{/if}};"
   >
     <div class="overlay">
       <span class="trace trace-tl" aria-hidden="true"></span>
       <span class="trace trace-br" aria-hidden="true"></span>
 
       <header class="header">
-        <img class="logo logo-left" src="http://localhost:3000/assets/logos/silicofeller.png" alt="Silicofeller" />
-        <img class="logo logo-right" src="http://localhost:3000/assets/logos/nvidia.png" alt="NVIDIA" />
+        <img class="logo logo-left" src='{{baseUrl}}/assets/logos/silicofeller.png' alt="Silicofeller" />
+        <img class="logo logo-right" src='{{baseUrl}}/assets/logos/nvidia.png' alt="NVIDIA" />
       </header>
 
       <div class="badge-row">

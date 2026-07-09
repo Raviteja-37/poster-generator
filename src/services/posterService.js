@@ -18,6 +18,8 @@ function generateHTML(data) {
   const renderData = {
     ...data,
 
+    baseUrl: process.env.BASE_URL,
+
     background: getRandomBackground(data.template),
   };
   console.log('Selected Background:', renderData.background);
