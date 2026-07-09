@@ -24,10 +24,7 @@ router.post('/', async (req, res) => {
     const image = await renderHTML(html);
 
     res.setHeader('Content-Type', 'image/png');
-    const fs = require('fs');
-
-    fs.writeFileSync('output/test.png', image);
-    res.send(image);
+    return res.send(image);
   } catch (err) {
     console.error(err);
 

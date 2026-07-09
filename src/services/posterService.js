@@ -23,6 +23,8 @@ function generateHTML(data) {
     background: getRandomBackground(data.template),
   };
   console.log('Selected Background:', renderData.background);
+  console.log('BASE_URL =', process.env.BASE_URL);
+  console.log(renderData);
 
   return compile(renderData);
 }
