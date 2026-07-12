@@ -1,0 +1,13 @@
+--> "docker build --no-cache -t poster-generator ." -> to clear the docker cache
+--> {
+ravitejakondamuri@RAVIs-MacBook-Air-2 poster-generator % docker run --rm \                                                      
+-e BASE_URL=http://localhost:3000 \
+-p 3000:3000 \
+poster-generator}
+
+-> to run the project
+
+
+--> To stop and run again....--> go to another teminal -> docker ps(for listing the containers) -> docker stop [container id u got from docker ps]-> now, run clear cache again and run again.
+
+--> To commit to git => git add . -> git commit -m "name of commit" -> git push
