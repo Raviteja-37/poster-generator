@@ -7,7 +7,7 @@ POST https://poster-generator-1-4blm.onrender.com/generate
 Content-Type: application/json
 
 {
-  "template": "update",
+  "template": "industry",
 
   "headline": "Quantum Chip Design is Too Slow",
   "subtitle": "AI is changing engineering workflows",
