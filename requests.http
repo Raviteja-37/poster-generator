@@ -7,7 +7,7 @@ POST https://poster-generator-1-4blm.onrender.com/generate
 Content-Type: application/json
 
 {
-  "template": "industry",
+  "template": "update",
 
   "headline": "Quantum Chip Design is Too Slow",
   "subtitle": "AI is changing engineering workflows",
@@ -60,5 +60,5 @@ Content-Type: application/json
     "Hardware"
   ],
 
-  "footer": "SilicoFeller • AI for Superconducting Chip Design"
+  "footer": "Silicofeller • AI for Superconducting Chip Design"
 }
