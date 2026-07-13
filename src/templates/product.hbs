@@ -17,11 +17,13 @@
 
     Required:  headline (product name)
     Optional:  subtitle (tagline), badge{text,type},
-               features[{title,description}]
+               features[{title,description}]  (keep to 2-4 items)
                price{amount,period}
                stats[{value,label}]
-               quote{text,author}, cta{title,url}, tags[], footer
+               quote{text,author}, cta{title,url}, footer
                background, layout (showcase|spotlight), accentColor
+
+    No hashtags/tags render in the image.
   --}}
 
   <div
@@ -99,13 +101,6 @@
 
       <footer class="footer">
         <span class="footer-line"></span>
-        <div class="tags-row">
-          {{#each tags}}
-            <span class="tag">{{this}}</span>
-          {{else}}
-            <span class="tag">#SilicoFeller</span>
-          {{/each}}
-        </div>
         <div class="footer-brand">
           <span>{{#if footer}}{{footer}}{{else}}SilicoFeller • Engineering the Future of Chips{{/if}}</span>
         </div>

@@ -1,4 +1,4 @@
-@import './base.css';
+@import url('/styles/base.css');
 
 /* =========================================================
    INDUSTRY — section styles (insight / question / comparison)
@@ -7,12 +7,13 @@
   background: var(--panel);
   border-left: 3px solid var(--accent);
   border-radius: 4px 14px 14px 4px;
-  padding: 24px 28px;
+  padding: 20px 24px;
+  flex-shrink: 0;
 }
 
 .sectionTitle {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -20,7 +21,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .prompt {
@@ -29,9 +30,13 @@
 
 .section p {
   margin: 0;
-  font-size: 23px;
-  line-height: 1.45;
+  font-size: 20px;
+  line-height: 1.4;
   color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* comparison: two-card before/after */
@@ -43,63 +48,66 @@
 
 .section-comparison .sectionTitle {
   color: var(--ink);
-  font-family: 'Sora', sans-serif;
-  font-size: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
   text-transform: none;
   letter-spacing: 0;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .compare-row {
   display: flex;
   align-items: stretch;
-  gap: 18px;
+  gap: 16px;
 }
 
 .compare-card {
   flex: 1;
   background: var(--panel);
   border-radius: 14px;
-  padding: 22px;
+  padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .compare-before {
   border-left: 3px solid var(--danger);
 }
-
 .compare-after {
   border-left: 3px solid var(--success);
 }
 
 .compare-label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .compare-card p {
   margin: 0;
-  font-size: 20px;
-  line-height: 1.4;
+  font-size: 18px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .compare-arrow {
   display: flex;
   align-items: center;
   color: var(--accent);
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .compare-list {
   margin: 0;
-  padding-left: 22px;
+  padding-left: 20px;
   color: var(--ink);
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 /* =========================================================
@@ -108,22 +116,23 @@
 [data-layout='split'] .content {
   flex-direction: row;
   align-items: center;
-  gap: 56px;
+  gap: 48px;
 }
 
 [data-layout='split'] .text-block {
   flex: 1.1;
 }
-
 [data-layout='split'] .headline {
-  font-size: 52px;
+  font-size: 46px;
 }
 
 [data-layout='split'] .content > *:not(.text-block) {
   flex: 0.9;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 18px;
+  min-height: 0;
+  overflow: hidden;
 }
 
 [data-layout='split'] .stats {
@@ -134,26 +143,22 @@
   align-items: center;
   text-align: center;
 }
-
 [data-layout='bold'] .text-block {
   align-items: center;
-  max-width: 900px;
+  max-width: 880px;
 }
-
 [data-layout='bold'] .headline {
-  font-size: 72px;
+  font-size: 62px;
   text-transform: uppercase;
 }
-
 [data-layout='bold'] .rule,
 [data-layout='bold'] .stats {
   justify-content: center;
 }
-
 [data-layout='bold'] .section,
 [data-layout='bold'] .quote {
   text-align: left;
-  max-width: 760px;
+  max-width: 740px;
 }
 
 [data-layout='spotlight'] .content {
@@ -161,47 +166,42 @@
   align-items: center;
   text-align: center;
 }
-
 [data-layout='spotlight'] .text-block {
   align-items: center;
 }
-
 [data-layout='spotlight'] .headline {
-  font-size: 54px;
+  font-size: 48px;
 }
-
 [data-layout='spotlight'] .rule,
 [data-layout='spotlight'] .stats {
   justify-content: center;
 }
-
 [data-layout='spotlight'] .card {
   background: var(--panel-strong);
 }
-
 [data-layout='spotlight'] .section,
 [data-layout='spotlight'] .quote {
   text-align: left;
-  max-width: 760px;
+  max-width: 740px;
 }
 
 [data-layout='editorial'] .subtitle {
   order: -1;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 14px;
+  margin: 0 0 12px;
+  -webkit-line-clamp: 1;
 }
 
 [data-layout='editorial'] .subtitle::before {
   content: '// ';
   color: var(--accent2);
 }
-
 [data-layout='editorial'] .headline {
-  font-size: 60px;
-  max-width: 760px;
+  font-size: 54px;
+  max-width: 740px;
 }

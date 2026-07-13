@@ -1,4 +1,4 @@
-@import './base.css';
+@import url('/styles/base.css');
 
 .badge-row {
   display: flex;
@@ -8,114 +8,109 @@
 
 .version-chip {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ink);
   background: var(--panel-strong);
-  padding: 8px 16px;
+  padding: 7px 15px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* =========================================================
-   CHANGELOG
+   CHANGELOG — capped height; keep changes[] short in the prompt
    ========================================================= */
 .changelog {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
+  max-height: 340px;
+  overflow: hidden;
 }
 
 .change-row {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 14px;
   background: var(--panel);
   border-radius: 12px;
-  padding: 16px 20px;
+  padding: 13px 18px;
   border-left: 3px solid var(--neutral);
 }
 
 .change-row[data-type='new'] {
   border-left-color: var(--success);
 }
-
 .change-row[data-type='improved'] {
   border-left-color: var(--accent);
 }
-
 .change-row[data-type='fixed'] {
   border-left-color: var(--warning);
 }
 
 .change-tag {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.08);
   color: var(--muted);
   white-space: nowrap;
   margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .change-row[data-type='new'] .change-tag {
   color: var(--success);
 }
-
 .change-row[data-type='improved'] .change-tag {
   color: var(--accent);
 }
-
 .change-row[data-type='fixed'] .change-tag {
   color: var(--warning);
 }
 
 .change-text {
   font-family: 'Inter', sans-serif;
-  font-size: 21px;
-  line-height: 1.4;
+  font-size: 18px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* =========================================================
    LAYOUT VARIANT: highlight
-   Big centered version badge as the hero, changelog compact below.
    ========================================================= */
 [data-layout='highlight'] .content {
   align-items: center;
   text-align: center;
 }
-
 [data-layout='highlight'] .text-block {
   align-items: center;
 }
-
 [data-layout='highlight'] .badge-row {
   justify-content: center;
 }
-
 [data-layout='highlight'] .version-chip {
-  font-size: 20px;
-  padding: 10px 22px;
+  font-size: 18px;
+  padding: 9px 20px;
 }
-
 [data-layout='highlight'] .headline {
-  font-size: 66px;
+  font-size: 56px;
 }
-
 [data-layout='highlight'] .rule {
   justify-content: center;
 }
-
 [data-layout='highlight'] .changelog {
   text-align: left;
-  max-width: 700px;
+  max-width: 680px;
   align-self: center;
 }
-
 [data-layout='highlight'] .stats {
   justify-content: center;
 }

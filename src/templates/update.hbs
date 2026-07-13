@@ -17,10 +17,12 @@
 
     Required:  headline
     Optional:  subtitle, badge{text,type}, version (e.g. "v2.4.0"),
-               changes[{type,text}]  -> type: new | improved | fixed
+               changes[{type,text}]  -> type: new | improved | fixed (keep to ~5 items)
                stats[{value,label}]
-               quote{text,author}, cta{title,url}, tags[], footer
+               quote{text,author}, cta{title,url}, footer
                background, layout (changelog|highlight), accentColor
+
+    No hashtags/tags render in the image.
   --}}
 
   <div
@@ -91,13 +93,6 @@
 
       <footer class="footer">
         <span class="footer-line"></span>
-        <div class="tags-row">
-          {{#each tags}}
-            <span class="tag">{{this}}</span>
-          {{else}}
-            <span class="tag">#SilicoFeller</span>
-          {{/each}}
-        </div>
         <div class="footer-brand">
           <span>{{#if footer}}{{footer}}{{else}}SilicoFeller • Engineering the Future of Chips{{/if}}</span>
         </div>
