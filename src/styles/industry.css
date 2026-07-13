@@ -1,6 +1,389 @@
 @import './base.css';
 
 /* =========================================================
+   BASE.CSS — shared by industry.css / event.css / update.css / product.css
+   Import with a RELATIVE path: @import url('/styles/base.css');
+
+   --fit-scale is set at runtime by the auto-fit script in each .hbf
+   (grows for short content to fill the canvas, shrinks for long
+   content so nothing overflows). Header, footer, badge, and the
+   corner trace signature are intentionally NOT scaled — they stay
+   constant on every post.
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #06080f;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* =========================================================
+   CANVAS
+   ========================================================= */
+.poster {
+  --accent: #5b8def;
+  --accent2: #ffb454;
+  --ink: #f5f7fa;
+  --muted: #93a0b4;
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-strong: rgba(255, 255, 255, 0.09);
+  --success: #3ed598;
+  --warning: #ffc857;
+  --danger: #ff5c7a;
+  --neutral: #93a0b4;
+  --fit-scale: 1;
+
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  background-color: #06080f;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(
+      1200px 700px at 85% -10%,
+      color-mix(in srgb, var(--accent) 20%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 7, 14, 0.55) 0%,
+      rgba(4, 7, 14, 0.82) 45%,
+      rgba(4, 7, 14, 0.94) 100%
+    );
+}
+
+/* =========================================================
+   SIGNATURE — circuit trace corner marks (fixed size, never scaled)
+   ========================================================= */
+.trace {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  opacity: 0.9;
+  filter: drop-shadow(
+    0 0 6px color-mix(in srgb, var(--accent) 60%, transparent)
+  );
+}
+
+.trace::before,
+.trace::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+  border-radius: 1px;
+}
+
+.trace-tl {
+  top: 26px;
+  left: 26px;
+}
+.trace-tl::before {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 40px;
+}
+.trace-tl::after {
+  top: 38px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+}
+
+.trace-br {
+  bottom: 26px;
+  right: 26px;
+}
+.trace-br::before {
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  height: 40px;
+}
+.trace-br::after {
+  bottom: 38px;
+  right: 0;
+  width: 40px;
+  height: 2px;
+}
+
+/* =========================================================
+   HEADER — logos always top-left / top-right, fixed size
+   ========================================================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+}
+
+/* =========================================================
+   BADGE — fixed size, not scaled
+   ========================================================= */
+.badge-row {
+  display: flex;
+  margin-top: 30px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid
+    color-mix(in srgb, var(--badge-color, var(--accent)) 55%, transparent);
+  color: var(--badge-color, var(--accent));
+  background: color-mix(
+    in srgb,
+    var(--badge-color, var(--accent)) 12%,
+    transparent
+  );
+}
+
+.badge[data-type='success'] {
+  --badge-color: var(--success);
+}
+.badge[data-type='warning'] {
+  --badge-color: var(--warning);
+}
+.badge[data-type='danger'] {
+  --badge-color: var(--danger);
+}
+.badge[data-type='neutral'] {
+  --badge-color: var(--neutral);
+}
+
+/* =========================================================
+   QUOTE — scaled
+   ========================================================= */
+.quote {
+  position: relative;
+  z-index: 2;
+  padding: 6px 0 6px calc(var(--fit-scale) * 26px);
+  border-left: 3px solid var(--accent2);
+}
+
+.quote-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: calc(var(--fit-scale) * 25px);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.quote-text::before {
+  content: '\201C';
+  color: var(--accent2);
+}
+.quote-text::after {
+  content: '\201D';
+  color: var(--accent2);
+}
+
+.quote-author {
+  margin-top: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: calc(var(--fit-scale) * 14px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.quote-author::before {
+  content: '\2014 ';
+}
+
+/* =========================================================
+   CTA — scaled
+   ========================================================= */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: calc(var(--fit-scale) * 16px);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #06080f;
+  background: var(--accent);
+  padding: calc(var(--fit-scale) * 13px) calc(var(--fit-scale) * 22px);
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.cta::after {
+  content: '\2192';
+}
+
+/* =========================================================
+   FOOTER — fixed size, not scaled
+   ========================================================= */
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.footer-line {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 100%;
+}
+
+.footer-brand {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* =========================================================
+   CONTENT — everything in here scales via --fit-scale.
+   min-height:0 + overflow:hidden is the LAST-RESORT safety net
+   (only kicks in if content hits the scale floor and still
+   doesn't fit, which should be rare).
+   ========================================================= */
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--fit-scale) * 30px);
+  margin-top: calc(var(--fit-scale) * 24px);
+  position: relative;
+  z-index: 2;
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 880px;
+  flex-shrink: 0;
+}
+
+.headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: calc(var(--fit-scale) * 52px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: calc(var(--fit-scale) * 24px);
+  color: var(--muted);
+  margin: calc(var(--fit-scale) * 14px) 0 0;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  margin-top: calc(var(--fit-scale) * 22px);
+}
+
+.rule::before {
+  content: '';
+  width: calc(var(--fit-scale) * 60px);
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.rule-node {
+  width: calc(var(--fit-scale) * 8px);
+  height: calc(var(--fit-scale) * 8px);
+  margin-left: 8px;
+  border-radius: 2px;
+  background: var(--accent2);
+  transform: rotate(45deg);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--fit-scale) * 18px);
+  flex-shrink: 0;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: calc(var(--fit-scale) * 20px) calc(var(--fit-scale) * 22px);
+  min-width: 180px;
+  flex: 1;
+}
+
+.number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: calc(var(--fit-scale) * 34px);
+  color: var(--ink);
+}
+
+.label {
+  margin-top: calc(var(--fit-scale) * 6px);
+  font-size: calc(var(--fit-scale) * 14px);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* =========================================================
    INDUSTRY — section styles (insight / question / comparison)
    ========================================================= */
 .section {
