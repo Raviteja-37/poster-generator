@@ -19,6 +19,12 @@ async function renderHTML(html) {
   // Give browser a moment to finish painting
   await page.waitForTimeout(500);
 
+  try {
+    await page.waitForSelector('body[data-fit-done="true"]', { timeout: 3000 });
+  } catch (e) {
+    // proceed anyway — better a slightly-off screenshot than a failed request
+  }
+
   const image = await page.screenshot({
     type: 'png',
 

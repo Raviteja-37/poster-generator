@@ -8,6 +8,7 @@
   rel='stylesheet'
   href='{{baseUrl}}/styles/{{template}}.css'
 />
+</head>
 
 <body>
 
@@ -17,11 +18,12 @@
     Required:  headline
     Optional:  subtitle, badge{text,type}, stats[{value,label}],
                sections[{type,title,content,items}]  -> type: insight | question | comparison
-               quote{text,author}, cta{title,url}, tags[], footer
+               quote{text,author}, cta{title,url}, footer
                background, layout (classic|split|bold|spotlight|editorial), accentColor
 
     Every optional block is skipped automatically if absent/empty.
-    tags/footer fall back to brand defaults if not provided.
+    footer falls back to a brand default if not provided.
+    No hashtags/tags render in the image.
   --}}
 
   <div
@@ -115,13 +117,6 @@
 
       <footer class="footer">
         <span class="footer-line"></span>
-        <div class="tags-row">
-          {{#each tags}}
-            <span class="tag">{{this}}</span>
-          {{else}}
-            <span class="tag">#SilicoFeller</span>
-          {{/each}}
-        </div>
         <div class="footer-brand">
           <span>{{#if footer}}{{footer}}{{else}}SilicoFeller • Engineering the Future of Chips{{/if}}</span>
         </div>
@@ -130,6 +125,57 @@
     </div>
   </div>
 
+  <script>
+    (function () {
+      var MIN_SCALE = 0.6;
+      var MAX_SCALE = 1.3;
+      var STEP = 0.03;
+      var poster = document.querySelector(".poster");
+      var content = document.querySelector(".content");
+
+      function run() {
+        if (!content || !poster) {
+          document.body.setAttribute("data-fit-done", "true");
+          return;
+        }
+        var scale = 1;
+        function setScale(s) { poster.style.setProperty("--fit-scale", s.toFixed(3)); }
+        function fits() { return content.scrollHeight <= content.clientHeight + 1; }
+
+        setScale(scale);
+
+        // too tall -> shrink until it fits (or hits the floor)
+        var guard = 0;
+        while (!fits() && scale > MIN_SCALE && guard < 30) {
+          scale = Math.max(MIN_SCALE, scale - STEP);
+          setScale(scale);
+          guard++;
+        }
+
+        // room to spare -> grow to fill the canvas (or hits the ceiling)
+        guard = 0;
+        while (fits() && scale < MAX_SCALE && guard < 30) {
+          var next = Math.min(MAX_SCALE, scale + STEP);
+          setScale(next);
+          if (fits()) {
+            scale = next;
+          } else {
+            setScale(scale);
+            break;
+          }
+          guard++;
+        }
+
+        document.body.setAttribute("data-fit-done", "true");
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(run).catch(run);
+      } else {
+        run();
+      }
+    })();
+  </script>
 </body>
 
 </html>

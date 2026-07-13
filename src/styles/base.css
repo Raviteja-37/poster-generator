@@ -1,7 +1,12 @@
 /* =========================================================
    BASE.CSS — shared by industry.css / event.css / update.css / product.css
-   Import with a RELATIVE path (works on localhost AND once deployed):
-     @import url('/styles/base.css');
+   Import with a RELATIVE path: @import url('/styles/base.css');
+
+   --fit-scale is set at runtime by the auto-fit script in each .hbf
+   (grows for short content to fill the canvas, shrinks for long
+   content so nothing overflows). Header, footer, badge, and the
+   corner trace signature are intentionally NOT scaled — they stay
+   constant on every post.
    ========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
@@ -34,6 +39,7 @@ body {
   --warning: #ffc857;
   --danger: #ff5c7a;
   --neutral: #93a0b4;
+  --fit-scale: 1;
 
   width: 1080px;
   height: 1080px;
@@ -69,7 +75,7 @@ body {
 }
 
 /* =========================================================
-   SIGNATURE — circuit trace corner marks (constant, all templates)
+   SIGNATURE — circuit trace corner marks (fixed size, never scaled)
    ========================================================= */
 .trace {
   position: absolute;
@@ -126,7 +132,7 @@ body {
 }
 
 /* =========================================================
-   HEADER — logos always top-left / top-right
+   HEADER — logos always top-left / top-right, fixed size
    ========================================================= */
 .header {
   display: flex;
@@ -145,7 +151,7 @@ body {
 }
 
 /* =========================================================
-   BADGE
+   BADGE — fixed size, not scaled
    ========================================================= */
 .badge-row {
   display: flex;
@@ -187,25 +193,21 @@ body {
 }
 
 /* =========================================================
-   QUOTE
+   QUOTE — scaled
    ========================================================= */
 .quote {
   position: relative;
   z-index: 2;
-  padding: 6px 0 6px 26px;
+  padding: 6px 0 6px calc(var(--fit-scale) * 26px);
   border-left: 3px solid var(--accent2);
 }
 
 .quote-text {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 25px;
+  font-size: calc(var(--fit-scale) * 25px);
   line-height: 1.35;
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .quote-text::before {
@@ -220,7 +222,7 @@ body {
 .quote-author {
   margin-top: 8px;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 14px;
+  font-size: calc(var(--fit-scale) * 14px);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
@@ -231,7 +233,7 @@ body {
 }
 
 /* =========================================================
-   CTA
+   CTA — scaled
    ========================================================= */
 .cta {
   display: inline-flex;
@@ -239,12 +241,12 @@ body {
   gap: 10px;
   align-self: flex-start;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px;
+  font-size: calc(var(--fit-scale) * 16px);
   font-weight: 600;
   letter-spacing: 0.03em;
   color: #06080f;
   background: var(--accent);
-  padding: 13px 22px;
+  padding: calc(var(--fit-scale) * 13px) calc(var(--fit-scale) * 22px);
   border-radius: 10px;
   position: relative;
   z-index: 2;
@@ -256,7 +258,7 @@ body {
 }
 
 /* =========================================================
-   FOOTER — brand line only (no hashtags in-image)
+   FOOTER — fixed size, not scaled
    ========================================================= */
 .footer {
   display: flex;
@@ -281,10 +283,10 @@ body {
 }
 
 /* =========================================================
-   CONTENT — the ONLY part allowed to clip if AI output runs long.
-   min-height:0 is the fix for flexbox children not shrinking;
-   overflow:hidden means a too-long section clips quietly instead
-   of pushing the footer off the bottom of the canvas.
+   CONTENT — everything in here scales via --fit-scale.
+   min-height:0 + overflow:hidden is the LAST-RESORT safety net
+   (only kicks in if content hits the scale floor and still
+   doesn't fit, which should be rare).
    ========================================================= */
 .content {
   flex: 1;
@@ -293,8 +295,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 30px;
-  margin-top: 24px;
+  gap: calc(var(--fit-scale) * 30px);
+  margin-top: calc(var(--fit-scale) * 24px);
   position: relative;
   z-index: 2;
 }
@@ -309,7 +311,7 @@ body {
 .headline {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
-  font-size: 52px;
+  font-size: calc(var(--fit-scale) * 52px);
   line-height: 1.12;
   letter-spacing: -0.01em;
   margin: 0;
@@ -319,32 +321,28 @@ body {
 .subtitle {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: calc(var(--fit-scale) * 24px);
   color: var(--muted);
-  margin: 14px 0 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  margin: calc(var(--fit-scale) * 14px) 0 0;
 }
 
 .rule {
   display: flex;
   align-items: center;
-  margin-top: 22px;
+  margin-top: calc(var(--fit-scale) * 22px);
 }
 
 .rule::before {
   content: '';
-  width: 60px;
+  width: calc(var(--fit-scale) * 60px);
   height: 3px;
   background: var(--accent);
   border-radius: 2px;
 }
 
 .rule-node {
-  width: 8px;
-  height: 8px;
+  width: calc(var(--fit-scale) * 8px);
+  height: calc(var(--fit-scale) * 8px);
   margin-left: 8px;
   border-radius: 2px;
   background: var(--accent2);
@@ -354,7 +352,7 @@ body {
 .stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: calc(var(--fit-scale) * 18px);
   flex-shrink: 0;
 }
 
@@ -363,7 +361,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  padding: 20px 22px;
+  padding: calc(var(--fit-scale) * 20px) calc(var(--fit-scale) * 22px);
   min-width: 180px;
   flex: 1;
 }
@@ -371,13 +369,13 @@ body {
 .number {
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
-  font-size: 34px;
+  font-size: calc(var(--fit-scale) * 34px);
   color: var(--ink);
 }
 
 .label {
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: calc(var(--fit-scale) * 6px);
+  font-size: calc(var(--fit-scale) * 14px);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--muted);

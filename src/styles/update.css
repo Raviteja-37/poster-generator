@@ -18,23 +18,21 @@
 }
 
 /* =========================================================
-   CHANGELOG — capped height; keep changes[] short in the prompt
+   CHANGELOG
    ========================================================= */
 .changelog {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-height: 340px;
-  overflow: hidden;
+  gap: calc(var(--fit-scale) * 10px);
 }
 
 .change-row {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: calc(var(--fit-scale) * 14px);
   background: var(--panel);
   border-radius: 12px;
-  padding: 13px 18px;
+  padding: calc(var(--fit-scale) * 13px) calc(var(--fit-scale) * 18px);
   border-left: 3px solid var(--neutral);
 }
 
@@ -50,7 +48,7 @@
 
 .change-tag {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
+  font-size: calc(var(--fit-scale) * 12px);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -75,12 +73,8 @@
 
 .change-text {
   font-family: 'Inter', sans-serif;
-  font-size: 18px;
+  font-size: calc(var(--fit-scale) * 18px);
   line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* =========================================================
@@ -101,7 +95,7 @@
   padding: 9px 20px;
 }
 [data-layout='highlight'] .headline {
-  font-size: 56px;
+  font-size: calc(var(--fit-scale) * 56px);
 }
 [data-layout='highlight'] .rule {
   justify-content: center;
