@@ -3,7 +3,7 @@ GET http://localhost:3000
 
 ###
 
-POST https://poster-generator-1-4blm.onrender.com/generate
+POST https://poster-generator-1-4blm.onrender.com/generate?debug=html
 Content-Type: application/json
 
 {
