@@ -21,6 +21,11 @@ router.post('/', async (req, res) => {
     }
     const html = generateHTML(req.body);
 
+    if (req.query.debug === 'html') {
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(html);
+    }
+
     const image = await renderHTML(html);
 
     res.setHeader('Content-Type', 'image/png');
