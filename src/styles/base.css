@@ -308,6 +308,14 @@ body {
   flex-shrink: 0;
 }
 
+/* by default this wrapper is invisible to layout — its children behave
+   as if they were direct children of .content (preserves .content's own
+   gap/column behavior for every layout except split, which overrides
+   this to make it a real single-column box). */
+.content-body {
+  display: contents;
+}
+
 .headline {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
