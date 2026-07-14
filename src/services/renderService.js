@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 
-async function renderHTML(html) {
+async function renderHTML(url) {
   const browser = await chromium.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -13,12 +13,9 @@ async function renderHTML(html) {
     },
   });
 
-  await page.setContent(html);
-
-  await page.waitForLoadState('networkidle');
-
-  // Give browser a moment to finish painting
-  await page.waitForTimeout(500);
+  // navigate to a real URL (real https:// origin) instead of
+  // page.setContent(), so external stylesheets/fonts load reliably
+  await page.goto(url, { waitUntil: 'networkidle' });
 
   try {
     await page.waitForSelector('body[data-fit-done="true"]', { timeout: 3000 });
@@ -28,7 +25,6 @@ async function renderHTML(html) {
 
   const image = await page.screenshot({
     type: 'png',
-
     fullPage: true,
   });
 
